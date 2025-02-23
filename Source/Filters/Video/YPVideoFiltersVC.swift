@@ -16,11 +16,15 @@ open class YPVideoFiltersVC: UIViewController, IsMediaFilterVC {
     /// Designated initializer
     public class func initWith(video: YPMediaVideo,
                                isFromSelectionVC: Bool,
-                               isRootViewController: Bool = false) -> YPVideoFiltersVC {
+                               isRootViewController: Bool = false,
+                               config: YPImagePickerConfiguration? = nil) -> YPVideoFiltersVC {
         let vc = YPVideoFiltersVC()
         vc.inputVideo = video
         vc.isFromSelectionVC = isFromSelectionVC
         vc.isRootViewController = isRootViewController
+        if let updatedConfig = config {
+            YPImagePickerConfiguration.shared = updatedConfig
+        }
         return vc
     }
 
