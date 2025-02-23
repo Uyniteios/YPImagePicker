@@ -11,14 +11,16 @@ import Photos
 import PryntTrimmerView
 import Stevia
 
-public final class YPVideoFiltersVC: UIViewController, IsMediaFilterVC {
+open class YPVideoFiltersVC: UIViewController, IsMediaFilterVC {
 
     /// Designated initializer
     public class func initWith(video: YPMediaVideo,
-                               isFromSelectionVC: Bool) -> YPVideoFiltersVC {
+                               isFromSelectionVC: Bool,
+                               isRootViewController: Bool = false) -> YPVideoFiltersVC {
         let vc = YPVideoFiltersVC()
         vc.inputVideo = video
         vc.isFromSelectionVC = isFromSelectionVC
+        vc.isRootViewController = isRootViewController
         return vc
     }
 
@@ -34,6 +36,7 @@ public final class YPVideoFiltersVC: UIViewController, IsMediaFilterVC {
     private var playbackTimeCheckerTimer: Timer?
     private var imageGenerator: AVAssetImageGenerator?
     private var isFromSelectionVC = false
+    private var isRootViewController: Bool = false
 
     private let trimmerContainerView: UIView = {
         let v = UIView()
@@ -165,11 +168,18 @@ public final class YPVideoFiltersVC: UIViewController, IsMediaFilterVC {
         coverBottomItem.trailing(0)
         equal(sizes: trimBottomItem, coverBottomItem)
 
+        if isRootViewController {
+            videoView.Top == view.safeAreaLayoutGuide.Top + 10
+        }
         videoView.heightEqualsWidth().fillHorizontally().top(0)
         videoView.Bottom == trimmerContainerView.Top
 
         coverImageView.followEdges(videoView)
 
+        trimmerView.layer.borderColor = YPConfig.colors.tintColor.cgColor
+        trimmerView.layer.borderWidth = 3
+        trimmerView.layer.cornerRadius = 8
+        trimmerView.backgroundColor = .red
         trimmerContainerView.fillHorizontally()
         trimmerContainerView.Top == videoView.Bottom
         trimmerContainerView.Bottom == trimBottomItem.Top

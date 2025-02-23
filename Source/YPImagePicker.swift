@@ -144,11 +144,16 @@ open class YPImagePicker: UINavigationController {
             case .video(let video):
                 if YPConfig.showsVideoTrimmer {
                     let videoFiltersVC = YPVideoFiltersVC.initWith(video: video,
-                                                                   isFromSelectionVC: false)
+                                                                   isFromSelectionVC: false,
+                                                                   isRootViewController: true)
                     videoFiltersVC.didSave = { [weak self] outputMedia in
                         self?.didSelect(items: [outputMedia])
                     }
-                    self?.pushViewController(videoFiltersVC, animated: true)
+                    videoFiltersVC.modalPresentationStyle = .fullScreen
+                    let navController = UINavigationController(rootViewController: videoFiltersVC)
+                    navController.modalPresentationStyle = .fullScreen
+                    self?.present(navController, animated: true)
+                    // self?.pushViewController(videoFiltersVC, animated: true)
                 } else {
                     self?.didSelect(items: [YPMediaItem.video(v: video)])
                 }
