@@ -17,3 +17,4 @@ Pod::Spec.new do |s|
   s.description  = "Instagram-like image picker & filters for iOS supporting videos and albums"
   s.swift_versions = ['5.0', '5.1', '5.2', '5.3']
 end
+5.
