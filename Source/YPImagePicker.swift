@@ -144,10 +144,13 @@ open class YPImagePicker: UINavigationController {
             case .video(let video):
                 if YPConfig.showsVideoTrimmer {
                     let videoFiltersVC = YPVideoFiltersVC.initWith(video: video,
-                                                                   isFromSelectionVC: false,
+                                                                   isFromSelectionVC: true,
                                                                    isRootViewController: true)
                     videoFiltersVC.didSave = { [weak self] outputMedia in
                         self?.didSelect(items: [outputMedia])
+                    }
+                    videoFiltersVC.didCancel = { [weak self] in
+                        self?.didSelect(items: [])
                     }
                     videoFiltersVC.modalPresentationStyle = .fullScreen
                     let navController = UINavigationController(rootViewController: videoFiltersVC)
