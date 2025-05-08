@@ -163,10 +163,7 @@ internal final class YPLibraryVC: UIViewController, YPPermissionCheckable {
     func multipleSelectionButtonTapped() {
         // If no items, than preventing multiple selection
         guard mediaManager.hasResultItems else {
-            if #available(iOS 14, *) {
-                PHPhotoLibrary.shared().presentLimitedLibraryPicker(from: self)
-            }
-
+            PHPhotoLibrary.shared().presentLimitedLibraryPicker(from: self)
             return
         }
 
@@ -228,15 +225,25 @@ internal final class YPLibraryVC: UIViewController, YPPermissionCheckable {
         }
     }
     
-    func refreshMediaRequest() {
-        let options = buildPHFetchOptions()
-
-        if let collection = mediaManager.collection {
-            mediaManager.fetchResult = PHAsset.fetchAssets(in: collection, options: options)
-        } else {
-            mediaManager.fetchResult = PHAsset.fetchAssets(with: options)
-        }
+    private func refreshMediaRequest() {
         
+        // calls to fetchAssets can take a while for large libraries and we don't want to block the main thread
+        DispatchQueue.global().async {
+            let options = self.buildPHFetchOptions()
+
+            if let collection = self.mediaManager.collection {
+                self.mediaManager.fetchResult = PHAsset.fetchAssets(in: collection, options: options)
+            } else {
+                self.mediaManager.fetchResult = PHAsset.fetchAssets(with: options)
+            }
+            
+            DispatchQueue.main.async {
+                self.refreshMediaRequestAfterFetch()
+            }
+        }
+    }
+    
+    private func refreshMediaRequestAfterFetch() {
         if mediaManager.hasResultItems,
         let firstAsset = mediaManager.getAsset(at: 0) {
             changeAsset(firstAsset)

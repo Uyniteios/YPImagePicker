@@ -9,11 +9,11 @@ Pod::Spec.new do |s|
   s.platform         = :ios
   s.source           = { :git => "https://github.com/Uyniteios/YPImagePicker.git",
                          :tag => s.version.to_s }
-  s.ios.deployment_target = "12.0"
+  s.ios.deployment_target = "15.0"
   s.source_files = 'Source/**/*.swift'
   s.dependency 'SteviaLayout', '= 5.1.2'
   s.dependency 'PryntTrimmerView', '= 4.0.2'
   s.resources    = ['Source/Resources/*', 'Source/**/*.xib']
   s.description  = "Instagram-like image picker & filters for iOS supporting videos and albums"
-  s.swift_versions = ['5.0', '5.1', '5.2', '5.3']
+  s.swift_versions = ['5.5']
 end
