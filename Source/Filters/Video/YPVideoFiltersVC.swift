@@ -57,11 +57,14 @@ open class YPVideoFiltersVC: UIViewController, IsMediaFilterVC {
     }()
     private let infoLabel: UILabel = {
         let label = UILabel()
-        label.text = YPConfig.wordings.trimInfoText
+        label.text = String(
+            format: YPConfig.wordings.trimInfoText,
+            String(format: "%.1f", YPConfig.video.trimmerMaxDuration)
+        )
         label.textAlignment = .center
         label.numberOfLines = 0
-        label.textColor = YPConfig.colors.filterBackgroundColor
-        label.font = YPConfig.fonts.pickerTitleFont
+        label.textColor = YPConfig.colors.bottomMenuItemSelectedTextColor
+        label.font = YPConfig.fonts.libaryWarningFont
         return label
     }()
     private let coverThumbSelectorView: ThumbSelectorView = {
