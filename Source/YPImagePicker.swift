@@ -155,8 +155,7 @@ open class YPImagePicker: UINavigationController {
                     videoFiltersVC.modalPresentationStyle = .fullScreen
                     let navController = UINavigationController(rootViewController: videoFiltersVC)
                     navController.modalPresentationStyle = .fullScreen
-                    self?.present(navController, animated: true)
-                    // self?.pushViewController(videoFiltersVC, animated: true)
+                    self?.pushViewController(videoFiltersVC, animated: true)
                 } else {
                     self?.didSelect(items: [YPMediaItem.video(v: video)])
                 }
