@@ -20,4 +20,4 @@
 "YPImagePickerVideoTooLong" = "Pick a video less than %@ seconds long";
 "YPImagePickerVideoTooShort" = "The video must be at least %@ seconds";
 "YPImagePickerWarningItemsLimit" = "The limit is %d photos or videos";
-"YPImagePickerTrimInfoText" = "The video will be trimmed to default %@ seconds. You can slide the handles to adjust the trim duration.";
+"YPImagePickerTrimInfoText" = "Default length: 60 sec. Slide the handles to adjust.";

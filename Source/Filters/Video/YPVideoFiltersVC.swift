@@ -63,7 +63,7 @@ open class YPVideoFiltersVC: UIViewController, IsMediaFilterVC {
         )
         label.textAlignment = .center
         label.numberOfLines = 0
-        label.textColor = YPConfig.colors.bottomMenuItemSelectedTextColor
+        label.textColor = YPConfig.colors.trimInfoLabelColor
         label.font = YPConfig.fonts.libaryWarningFont
         return label
     }()
